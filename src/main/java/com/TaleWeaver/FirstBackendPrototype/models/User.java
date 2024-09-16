@@ -44,4 +44,6 @@ public class User {
 
     @UpdateTimestamp
     private Date updateDate;
+
+    private Date verifiedDate;
 }
