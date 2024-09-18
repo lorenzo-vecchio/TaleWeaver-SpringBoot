@@ -5,16 +5,20 @@ package com.TaleWeaver.FirstBackendPrototype.models.enums;
  * Each session has its own duration.
  */
 public enum SessionType {
-    /**
-     * Short session - typically for brief activities. Duration = 1 hr / 3600 s
-     */
-    SHORT,
-    /**
-     * Long session - for extended activities. Duration = 1 month / 2592000 s
-     */
-    LONG,
-    /**
-     * Permanent session - no pre-defined end time.
-     */
-    PERMANENT
+    /** Session duration: 1 hour */
+    SHORT(3600),
+    /** Session duration: 1 day */
+    MEDIUM(86400),
+    /** Session duration: 1 week */
+    LONG(604800);
+
+    private final int expirationSeconds;
+
+    SessionType(int expirationSeconds) {
+        this.expirationSeconds = expirationSeconds;
+    }
+
+    public int getExpirationSeconds() {
+        return expirationSeconds;
+    }
 }
