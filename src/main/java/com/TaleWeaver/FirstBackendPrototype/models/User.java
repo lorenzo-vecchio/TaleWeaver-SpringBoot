@@ -1,5 +1,6 @@
 package com.TaleWeaver.FirstBackendPrototype.models;
 
+import com.TaleWeaver.FirstBackendPrototype.models.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -46,4 +47,7 @@ public class User {
     private Date updateDate;
 
     private Date verifiedDate;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
