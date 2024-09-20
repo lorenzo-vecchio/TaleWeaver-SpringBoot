@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -48,6 +49,7 @@ public class User {
 
     private Date verifiedDate;
 
+    @ElementCollection(targetClass = Role.class)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private List<Role> roles;
 }
