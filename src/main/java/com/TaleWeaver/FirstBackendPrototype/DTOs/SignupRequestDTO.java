@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.beans.Transient;
 
 @Getter
 public class SignupRequestDTO {
@@ -22,11 +25,13 @@ public class SignupRequestDTO {
     @Size(min = 6, max = 20, message = "Password must be between 6 and 20 characters")
     String password;
 
+    @Transient
     public User getUser() {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword(password);
+        String encryptedPassword = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(encryptedPassword);
         return user;
     }
 
