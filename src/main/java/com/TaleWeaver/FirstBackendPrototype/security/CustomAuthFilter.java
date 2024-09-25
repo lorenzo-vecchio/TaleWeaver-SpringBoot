@@ -20,6 +20,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.UUID;
 
+// TODO: check for expiration of code
+
 @Component
 public class CustomAuthFilter extends OncePerRequestFilter {
 

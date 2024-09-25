@@ -16,10 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth")
@@ -70,7 +70,14 @@ public class AuthController {
 
     @PostMapping("/logout")
     @IsAuthenticated
-    public ResponseEntity<Void> logout() {
+    public ResponseEntity<Void> logout(@CookieValue(Constants.COOKIE_NAME) String authKey, Principal principal, HttpServletResponse response) {
+        // TODO: fix logout
+        Session session = sessionRepository.findSessionById(UUID.fromString(authKey));
+        Cookie cookie = new Cookie(Constants.COOKIE_NAME, session.getId().toString());
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        sessionRepository.delete(session);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

@@ -31,5 +31,5 @@ public class Session {
     private Date creationDate;
 
     @Enumerated(EnumType.STRING)
-    private SessionType sessionType = SessionType.HOUR;
+    private SessionType sessionType;
 }
