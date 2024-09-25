@@ -6,11 +6,11 @@ package com.TaleWeaver.FirstBackendPrototype.models.enums;
  */
 public enum SessionType {
     /** Session duration: 1 hour */
-    SHORT(3600),
+    HOUR(3600),
     /** Session duration: 1 day */
-    MEDIUM(86400),
+    DAY(86400),
     /** Session duration: 1 week */
-    LONG(604800);
+    WEEK(604800);
 
     private final int expirationSeconds;
 

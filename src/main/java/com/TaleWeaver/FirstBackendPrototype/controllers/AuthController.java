@@ -51,7 +51,7 @@ public class AuthController {
                 // create session
                 Session session = new Session();
                 session.setUser(user);
-                session.setSessionType(SessionType.SHORT);
+                session.setSessionType(SessionType.HOUR);
                 sessionRepository.save(session);
                 // create cookie
                 Cookie cookie = new Cookie(Constants.COOKIE_NAME, session.getId().toString());

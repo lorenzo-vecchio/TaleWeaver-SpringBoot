@@ -38,7 +38,7 @@ public class User {
     private String password;
 
     @NotNull
-    private boolean verified;
+    private boolean verifiedEmail = false;
 
     @CreationTimestamp
     private Date creationDate;
