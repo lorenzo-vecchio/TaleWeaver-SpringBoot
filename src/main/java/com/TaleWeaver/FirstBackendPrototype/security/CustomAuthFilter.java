@@ -4,12 +4,14 @@ import com.TaleWeaver.FirstBackendPrototype.models.Session;
 import com.TaleWeaver.FirstBackendPrototype.models.User;
 import com.TaleWeaver.FirstBackendPrototype.repositories.SessionRepository;
 import com.TaleWeaver.FirstBackendPrototype.repositories.UserRepository;
+import com.TaleWeaver.FirstBackendPrototype.utils.Constants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,7 +46,7 @@ public class CustomAuthFilter extends OncePerRequestFilter {
     private String extractAuthKeyFromCookies(Cookie[] cookies) {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if ("TaleWeaver".equals(cookie.getName())) {
+                if (Constants.COOKIE_NAME.equals(cookie.getName())) {
                     return cookie.getValue();
                 }
             }
