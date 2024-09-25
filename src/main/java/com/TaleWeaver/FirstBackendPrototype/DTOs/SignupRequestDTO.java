@@ -3,7 +3,6 @@ package com.TaleWeaver.FirstBackendPrototype.DTOs;
 import com.TaleWeaver.FirstBackendPrototype.models.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
