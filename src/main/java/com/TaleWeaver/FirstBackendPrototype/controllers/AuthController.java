@@ -71,9 +71,8 @@ public class AuthController {
     @PostMapping("/logout")
     @IsAuthenticated
     public ResponseEntity<Void> logout(@CookieValue(Constants.COOKIE_NAME) String authKey, Principal principal, HttpServletResponse response) {
-        // TODO: fix logout
         Session session = sessionRepository.findSessionById(UUID.fromString(authKey));
-        Cookie cookie = new Cookie(Constants.COOKIE_NAME, session.getId().toString());
+        Cookie cookie = new Cookie(Constants.COOKIE_NAME, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);

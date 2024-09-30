@@ -20,8 +20,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.UUID;
 
-// TODO: check for expiration of code
-
 @Component
 public class CustomAuthFilter extends OncePerRequestFilter {
 
@@ -58,7 +56,7 @@ public class CustomAuthFilter extends OncePerRequestFilter {
             UUID sessionId = UUID.fromString(authKey);
             Session session = sessionRepository.findSessionById(sessionId);
 
-            if (session != null) {
+            if (session != null && !session.isExpired()) {
                 User user = session.getUser();
                 if (user != null) {
                     UserDetails userDetails = customUserDetailService.loadUserByUsername(user.getUsername());
@@ -79,7 +77,7 @@ public class CustomAuthFilter extends OncePerRequestFilter {
                     throw new ServletException("User not found for session ID: " + sessionId);
                 }
             } else {
-                throw new ServletException("No session found for ID: " + sessionId);
+                throw new ServletException("No session found for ID or session expired: " + sessionId);
             }
         } catch (IllegalArgumentException e) {
             throw new ServletException("Invalid session ID format: " + authKey, e);

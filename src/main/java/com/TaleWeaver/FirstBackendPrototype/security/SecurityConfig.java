@@ -1,5 +1,6 @@
 package com.TaleWeaver.FirstBackendPrototype.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +17,9 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableMethodSecurity(securedEnabled = true) // Enable method-level security
 public class SecurityConfig {
 
+    @Autowired
+    CustomAuthFilter customAuthFilter;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -24,7 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/**").permitAll()
                 )
-                .addFilterBefore(new CustomAuthFilter(), BasicAuthenticationFilter.class); // Add custom filter
+                .addFilterBefore(customAuthFilter, BasicAuthenticationFilter.class); // Add custom filter
 
         return http.build();
     }
