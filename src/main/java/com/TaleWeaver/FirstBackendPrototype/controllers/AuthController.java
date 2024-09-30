@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.UUID;
 
 @RestController
@@ -70,7 +69,7 @@ public class AuthController {
 
     @PostMapping("/logout")
     @IsAuthenticated
-    public ResponseEntity<Void> logout(@CookieValue(Constants.COOKIE_NAME) String authKey, Principal principal, HttpServletResponse response) {
+    public ResponseEntity<Void> logout(@CookieValue(Constants.COOKIE_NAME) String authKey, HttpServletResponse response) {
         Session session = sessionRepository.findSessionById(UUID.fromString(authKey));
         Cookie cookie = new Cookie(Constants.COOKIE_NAME, null);
         cookie.setMaxAge(0);
