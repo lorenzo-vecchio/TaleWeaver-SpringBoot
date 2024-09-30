@@ -40,4 +40,18 @@ public class CustomUserDetailService implements UserDetailsService {
                 authorities
         );
     }
+
+    @Transactional
+    public UserDetails loadUserByUserObj(User user) throws UsernameNotFoundException {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : user.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority(role.toString()));
+        }
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                authorities
+        );
+    }
 }

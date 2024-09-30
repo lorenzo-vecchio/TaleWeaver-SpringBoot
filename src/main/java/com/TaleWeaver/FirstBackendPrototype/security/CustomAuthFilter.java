@@ -59,7 +59,7 @@ public class CustomAuthFilter extends OncePerRequestFilter {
             if (session != null && !session.isExpired()) {
                 User user = session.getUser();
                 if (user != null) {
-                    UserDetails userDetails = customUserDetailService.loadUserByUsername(user.getUsername());
+                    UserDetails userDetails = customUserDetailService.loadUserByUserObj(user);
 
                     // Create authentication object with details
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
